@@ -24,8 +24,9 @@ const User = sequelize.define('users', {
     }
 );
 
-exports.isLoginValid = function (num, password) {
+exports.isLoginValid = (num, password) => {
     return User.findAll({
+        limit: 1,
         where: {
             account: num,
             password: password

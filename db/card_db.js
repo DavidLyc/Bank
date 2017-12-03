@@ -26,8 +26,18 @@ const Card = sequelize.define('cards', {
     }
 );
 
-exports.getAllCards = function () {
+exports.getAllCards = () => {
     return Card.findAll({
         attributes: ['username', 'cardnum', 'balance']
+    });
+};
+
+exports.validateLogin = (cardNum, password) => {
+    return Card.findAll({
+        limit: 1,
+        where: {
+            cardnum: cardNum,
+            password: password
+        }
     });
 };

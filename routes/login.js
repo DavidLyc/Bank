@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const url = require("url");
 const fs = require("fs");
+const card_db = require('../db/card_db');
 
 app.get('/*', (req, res) => {
         const pathname = url.parse(req.url).pathname;
@@ -13,34 +14,26 @@ app.get('/*', (req, res) => {
                     res.end();
                 });
                 break;
-            case '/validLogin':
-                break;
         }
     }
 );
 
+app.post('/*', (req, res) => {
+    const pathname = url.parse(req.url).pathname;
+    switch (pathname) {
+        case '/postLogin':
+            const postJson = JSON.parse(JSON.stringify(req.body));
+            card_db.validateLogin(postJson.cardNum, postJson.password)
+                .then(result => {
+                    res.writeHead(200, {"Content-Type": "text/plain; charset=utf-8"});
+                    if (JSON.stringify(result) !== '[]') {
+                        res.end('success!');
+                    } else {
+                        res.end('failed!');
+                    }
+                });
+            break;
+    }
+});
+
 module.exports = app;
-
-// router.get('/', function (req, res, next) {
-//     res.render('login', {title: 'Express'});
-// });
-//
-// router.get('/validLogin', (req, res) => {
-//     console.log(JSON.stringify(req));
-//     res.writeHead(200, {"Content-Type": "text/html;charset=utf-8"});
-//     // const cardNum = req.query.account;
-//     // const password = req.query.password;
-//     // console.log(cardNum);
-//     // console.log(password);
-//     // user_db.isLoginValid(cardNum, password)
-//     //     .then(users => {
-//     //         if (JSON.stringify(users) !== '[]') {
-//     //             res.end('登陆成功');
-//     //         }
-//     //         else {
-//     //             res.end('登录失败');
-//     //         }
-//     //     });
-// });
-
-// <!DOCTYPE html><meta charset="UTF-8"> <script>alert("登陆成功!"); </script>

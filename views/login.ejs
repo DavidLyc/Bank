@@ -14,29 +14,12 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
     <title>登录</title>
-    <!--<script>-->
-        <!--$(document).ready(function () {-->
-            <!--$('#login').click(function () {-->
-                <!--const account = $('#cardNum').val();-->
-                <!--const password = $('#password').val();-->
-                <!--if (account !== '' && password !== '') {-->
-                    <!--const xmlHttp = new XMLHttpRequest();-->
-                    <!--xmlHttp.onreadystatechange = function () {-->
-                        <!--console.log(xmlHttp.responseText);-->
-                    <!--}-->
-                    <!--xmlHttp.open('POST', 'http://localhost:8888/login/validLogin', true);-->
-                    <!--xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");-->
-                    <!--xmlHttp.send("account=" + account + "&password=" + password);-->
-                <!--}-->
-            <!--})-->
-        <!--})-->
-    <!--</script>-->
 </head>
 
 <body>
 <div class="container" style="font-weight: normal;max-width: 400px;margin: 150px auto;">
     <h2>请输入</h2>
-    <form action="http://localhost:8888/login" method="POST">
+    <form action="login/postLogin" method="POST" enctype="application/x-www-form-urlencoded">
         <div style="margin-top: 12px"></div>
         <input type="text" name="cardNum" id="cardNum" class="form-control" placeholder="银行卡号" required autofocus>
         <div style="margin-top: 10px"></div>
