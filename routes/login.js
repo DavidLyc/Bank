@@ -21,15 +21,16 @@ app.get('/*', (req, res) => {
 app.post('/*', (req, res) => {
     const pathname = url.parse(req.url).pathname;
     switch (pathname) {
-        case '/postLogin':
+        case '/':
             const postJson = JSON.parse(JSON.stringify(req.body));
             card_db.validateLogin(postJson.cardNum, postJson.password)
                 .then(result => {
                     res.writeHead(200, {"Content-Type": "text/plain; charset=utf-8"});
                     if (JSON.stringify(result) !== '[]') {
-                        res.end('success!');
+                        req.session.loginUser = postJson.cardNum;
+                        res.end('pass');
                     } else {
-                        res.end('failed!');
+                        res.end('deny');
                     }
                 });
             break;

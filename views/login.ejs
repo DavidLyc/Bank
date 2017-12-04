@@ -19,15 +19,35 @@
 <body>
 <div class="container" style="font-weight: normal;max-width: 400px;margin: 150px auto;">
     <h2>请输入</h2>
-    <form action="login/postLogin" method="POST" enctype="application/x-www-form-urlencoded">
+    <form id="login_form">
         <div style="margin-top: 12px"></div>
         <input type="text" name="cardNum" id="cardNum" class="form-control" placeholder="银行卡号" required autofocus>
         <div style="margin-top: 10px"></div>
         <input type="password" name='password' id="password" class="form-control" placeholder="密码" required>
         <div style="margin-top: 15px"></div>
-        <input type="submit" value="登录" class="btn btn-lg btn-primary btn-block">
+        <input id="submit" type="button" value="登录" class="btn btn-lg btn-primary btn-block"/>
     </form>
 </div>
-</body>
 
+<script>
+    $('#submit').click(() => {
+        $.ajax({
+            type: 'POST',
+            url: 'login',
+            data: $('#login_form').serialize(),
+            async: false,
+            success: (res) => {
+                if (res === 'pass') {
+                    $(location).attr('href', 'cards/allCards');
+                } else {
+                    alert("银行卡号或密码错误！");
+                }
+            },
+            error: () => {
+                alert("网络连接出错！");
+            }
+        });
+    });
+</script>
+</body>
 </html>

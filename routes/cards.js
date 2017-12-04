@@ -6,7 +6,6 @@ const url = require("url");
 
 app.get('/*', (req, res) => {
     const pathname = url.parse(req.url).pathname;
-    console.log(pathname);
     switch (pathname) {
         case '/allCards':
             res.writeHead(200, {"Content-Type": "application/json;charset=utf-8"});
