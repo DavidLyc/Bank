@@ -4,15 +4,8 @@
     <meta charset="UTF-8">
     <!--jQuery-->
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-
-    <!--Bootstrap core CSS-->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!--Bootstrap core JavaScript-->
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
+    <!--Bootstrap-->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <title>登录</title>
 </head>
 
@@ -38,9 +31,9 @@
             async: false,
             success: (res) => {
                 if (res === 'pass') {
-                    $(location).attr('href', 'cards/allCards');
+                    $(location).attr('href', 'home');
                 } else {
-                    alert("银行卡号或密码错误！");
+                    alert(res);
                 }
             },
             error: () => {

@@ -15,23 +15,19 @@ const sequelize = new Sequelize('bank', 'root', '123456', {
 const Card = sequelize.define('cards', {
         id: {
             primaryKey: true,
-            type: Sequelize.STRING
+            type: Sequelize.INTEGER(20)
         },
-        password: Sequelize.STRING,
-        username: Sequelize.STRING,
-        balance: Sequelize.STRING,
-        cardnum: Sequelize.STRING
+        password: Sequelize.STRING(20),
+        username: Sequelize.STRING(20),
+        balance: Sequelize.FLOAT,
+        idnum: Sequelize.STRING(20),
+        cardnum: Sequelize.INTEGER(20)
     }, {
         timestamps: false
     }
 );
 
-exports.getAllCards = () => {
-    return Card.findAll({
-        attributes: ['username', 'cardnum', 'balance']
-    });
-};
-
+//验证登陆
 exports.validateLogin = (cardNum, password) => {
     return Card.findAll({
         limit: 1,
@@ -40,4 +36,12 @@ exports.validateLogin = (cardNum, password) => {
             password: password
         }
     });
+};
+
+//重置密码
+exports.resetPassword = (cardNum) => {
+    return Card.update(
+        {password: '123456'},
+        {where: {cardnum: cardNum}}
+    );
 };

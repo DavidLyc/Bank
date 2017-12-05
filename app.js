@@ -4,7 +4,8 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const login = require('./routes/login');
-const card_db = require('./routes/cards');
+const card = require('./routes/cards');
+const home = require('./routes/home');
 const http = require("http");
 const app = express();
 const session = require('express-session');
@@ -19,8 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-    secret: '12345',
-    name: 'test',
+    secret: '0805',
     cookie: {
         maxAge: 1000 * 60 * 30  //cookie有效期30min
     },
@@ -39,7 +39,8 @@ app.use((req, res, next) => {
 
 //url
 app.use('/login', login);
-app.use('/cards', card_db);
+app.use('/cards', card);
+app.use('/home', home);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
