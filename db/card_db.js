@@ -38,6 +38,14 @@ exports.validateLogin = (cardNum, password) => {
     });
 };
 
+//修改密码
+exports.modifyPassword = (cardNum, newPassword) => {
+    return Card.update(
+        {password: newPassword},
+        {where: {cardnum: cardNum}}
+    );
+};
+
 //重置密码
 exports.resetPassword = (cardNum) => {
     return Card.update(

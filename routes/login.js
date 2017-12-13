@@ -8,7 +8,7 @@ app.get('/*', (req, res) => {
         const pathname = url.parse(req.url).pathname;
         switch (pathname) {
             case '/':
-                fs.readFile("./views/login.ejs", "utf-8", (err, data) => {
+                fs.readFile("views/login.ejs", "utf-8", (err, data) => {
                     res.write(data);
                     res.end();
                 });
@@ -26,6 +26,7 @@ app.post('/*', (req, res) => {
                 .then(result => {
                     if (JSON.stringify(result) !== '[]') {
                         req.session.loginUser = postJson.cardNum;
+                        req.session.loginPassword = postJson.password;
                         res.end('pass');
                     } else {
                         res.end('银行卡号或密码错误！');
